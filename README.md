@@ -10,9 +10,9 @@ go against FCC guidelines.
 Installing is fairly straight forward. All that is required is python 3 and
 beautiful soup 4.
 
-'''bash
+```bash
 pip install beautifulsoup4
-'''
+```
 
 ## Usage
 When given the name of a .songs file, the program will do the rest. Run main.py
