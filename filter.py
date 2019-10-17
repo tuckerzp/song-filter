@@ -9,13 +9,13 @@ def count_word(word, lyrics):
     lyrics : String[]
         List of words to search through
     """
-    num = 0
+    found = []
 
     for w in lyrics:
         if word in w:
-            num += 1
+            found.append(w)
 
-    return num
+    return found
 
 def list_words(blacklist, lyrics):
     """
@@ -31,10 +31,7 @@ def list_words(blacklist, lyrics):
     word_list = []
 
     for b in blacklist:
-
-        n = count_word(b, lyrics)
-
-        for i in range(n):
-            word_list.append(b)
+        word_list.extend(count_word(b, lyrics))
 
     return word_list
+
