@@ -4,9 +4,9 @@ from filter import *
 
 def main():
     
-    words = ["bad", "sad", "bad", "k"]
+    words = ["bad", "sad", "bad", "k", "baddy"]
 
-    n = check_for_word("bad", words)
+    n = count_words("bad", words)
 
     print("%s is printed %d times" % (words[0], n))
 
