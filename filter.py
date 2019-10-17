@@ -10,7 +10,7 @@ def count_word(word, lyrics):
         List of words to search through
     """
     num = 0
-    
+
     for w in lyrics:
         if word in w:
             num += 1
@@ -20,12 +20,12 @@ def count_word(word, lyrics):
 def list_words(blacklist, lyrics):
     """
     Add all occurrences of blacklisted words found in a list
-    
+
     Parameters
     ----------
-    blacklist : String[] 
+    blacklist : String[]
         Blacklisted words to check against
-    words     : String[]     
+    words     : String[]
         List of words to search through
     """
     word_list = []
