@@ -1,4 +1,4 @@
-def count_word(word, lyrics):
+def get_occurrences(word, lyrics):
     """
     Counts number of times a word is contained within a list
 
@@ -8,14 +8,19 @@ def count_word(word, lyrics):
         Word to look for
     lyrics : String[]
         List of words to search through
+
+    Returns
+    -------
+    String[]
+        List of all matching words from the lyrics
     """
-    num = 0
+    found = []
 
     for w in lyrics:
         if word in w:
-            num += 1
+            found.append(w)
 
-    return num
+    return found
 
 def list_words(blacklist, lyrics):
     """
@@ -27,14 +32,16 @@ def list_words(blacklist, lyrics):
         Blacklisted words to check against
     words     : String[]
         List of words to search through
+
+    Returns
+    -------
+    String[]
+        List of all words from the lyrics that match a word in the blacklist
     """
     word_list = []
 
     for b in blacklist:
-
-        n = count_word(b, lyrics)
-
-        for i in range(n):
-            word_list.append(b)
+        word_list.extend(get_occurrences(b, lyrics))
 
     return word_list
+
