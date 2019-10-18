@@ -1,3 +1,6 @@
+import lyricsgenius
+import re
+
 def get_occurrences(word, lyrics):
     """
     Counts number of times a word is contained within a list
@@ -45,6 +48,35 @@ def list_words(blacklist, lyrics):
 
     return word_list
 
+def grab_genius(author, song):
+    """
+    Grabs the lyrics from genius of a given song
+
+    Parameters
+    ----------
+    author : String
+        Name of the author
+    song:
+        Name of the song
+
+    Returns
+    -------
+    String
+        The lyrics of a song
+    """
+    # Get clien_access_token
+    with open('key.txt', 'r') as myfile:
+        key = myfile.read().split('\n')
+    
+    # Use Key to interact with Genius API
+    genius = lyricsgenius.Genius(key[0])
+    genius.verbose = False
+
+    # Search Genius for song
+    song = genius.search_song(song, author)
+
+    return song.lyrics
+
 def output_song_info(author, song, word_list):
     """
     Prints out a information on a given song
@@ -58,9 +90,9 @@ def output_song_info(author, song, word_list):
     word_list : String[]
         List of all words from the lyrics that match a word in the blacklist
     """
-    
     print("%s's song: %s had %d blacklisted words" % (author, song,
             len(word_list))) 
     
     for w in word_list:
-        print(w)
+        # Print word found without special characters
+        print(re.sub(r'[^\w.]', '', w))
