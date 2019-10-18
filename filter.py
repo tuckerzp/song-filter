@@ -45,3 +45,22 @@ def list_words(blacklist, lyrics):
 
     return word_list
 
+def output_song_info(author, song, word_list):
+    """
+    Prints out a information on a given song
+
+    Parameterts
+    -----------
+    author    : String
+        Name of the author
+    song      : String
+        Name of the song 
+    word_list : String[]
+        List of all words from the lyrics that match a word in the blacklist
+    """
+    
+    print("%s's song: %s had %d blacklisted words" % (author, song,
+            len(word_list))) 
+    
+    for w in word_list:
+        print(w)
