@@ -48,7 +48,7 @@ def list_words(blacklist, lyrics):
 
     return word_list
 
-def grab_genius(author, song):
+def grab_genius(author, song, genius):
     """
     Grabs the lyrics from genius of a given song
 
@@ -56,26 +56,39 @@ def grab_genius(author, song):
     ----------
     author : String
         Name of the author
-    song:
+    song   : String
         Name of the song
+    genius : Genius
+        Genius access to API
 
     Returns
     -------
     String
         The lyrics of a song
     """
-    # Get clien_access_token
-    with open('key.txt', 'r') as myfile:
-        key = myfile.read().split('\n')
-    
-    # Use Key to interact with Genius API
-    genius = lyricsgenius.Genius(key[0])
-    genius.verbose = False
-
     # Search Genius for song
     song = genius.search_song(song, author)
 
     return song.lyrics
+
+def open_genius():
+    """
+    Opens the Genius API
+
+    Returns
+    -------
+    Genius API
+        Access to Genius API
+    """
+    # Get client_access_token
+    with open('key.txt', 'r') as myfile:
+        key = myfile.read().split('\n') 
+
+    # Use Key to interact with Genius API
+    genius = lyricsgenius.Genius(key[0])
+    genius.verbose = False
+
+    return genius
 
 def output_song_info(author, song, word_list):
     """
