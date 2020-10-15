@@ -14,16 +14,35 @@ def get_occurrences(word, lyrics):
 
     Returns
     -------
-    String[]
-        List of all matching words from the lyrics
+    int
+        num of occurences
     """
-    found = []
+    found = 0
 
-    for w in lyrics:
+    for w in lyrics: 
         if word in w:
-            found.append(w)
+            found = found + 1
 
     return found
+
+def get_blacklist():
+    """
+    Gets a list of all the blacklisted words
+
+    Returns
+    -------
+    String[]
+        List of all the blacklisted words
+    """
+    blacklist = []
+
+    with open('BLACKLIST') as file:
+        for line in file:
+            blacklist.append(line.strip())
+    
+    return blacklist
+
+
 
 def list_words(blacklist, lyrics):
     """
@@ -38,13 +57,15 @@ def list_words(blacklist, lyrics):
 
     Returns
     -------
-    String[]
+    Dictionary {String word: int occurences}
         List of all words from the lyrics that match a word in the blacklist
     """
-    word_list = []
+    word_list = {}
 
     for b in blacklist:
-        word_list.extend(get_occurrences(b, lyrics))
+        occ = get_occurrences(b, lyrics)
+        if (occ > 0):
+            word_list[b] = occ
 
     return word_list
 
@@ -69,7 +90,9 @@ def grab_genius(author, song, genius):
     # Search Genius for song
     song = genius.search_song(song, author)
 
-    return song.lyrics
+    lyrics = song.lyrics.replace("\n", " ").split(" ")
+
+    return lyrics if (song) else -1
 
 def open_genius():
     """
@@ -92,7 +115,7 @@ def open_genius():
 
 def output_song_info(author, song, word_list):
     """
-    Prints out a information on a given song
+    Prints out information on a given song
 
     Parameterts
     -----------
@@ -103,9 +126,9 @@ def output_song_info(author, song, word_list):
     word_list : String[]
         List of all words from the lyrics that match a word in the blacklist
     """
-    print("%s's song: %s had %d blacklisted words" % (author, song,
+    print("\n%s's song: %s had %d blacklisted words" % (author, song,
             len(word_list))) 
     
     for w in word_list:
         # Print word found without special characters
-        print(re.sub(r'[^\w.]', '', w))
+        print(w + " x " + str(word_list.get(w)))
