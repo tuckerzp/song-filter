@@ -15,18 +15,24 @@ pip install beautifulsoup4
 ```
 
 ```bash
-pip install pyyaml
+pip install lyricsgenius
 ```
 
 ## Usage
-When given the name of a .yaml file, the program will do the rest. Run main.py
-and give it the name of the file without .songs at end. See sample.yaml for an 
-example on how to add artists and songs.
+All you need to run is to make a .txt file! See the sample.txt for help.\
+\
+The format is:\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AuthorName---SongTitle\
+\
+Then pass the program your txt file and it will run. For example:
+
+```bash
+python main.py sample.txt
+```
+
+
+
 
 ## TODO
-1. Finish main driver
-2. Pull lyrics from Genius 
-3. Make function to read a .songs file
-4. Have informative output 
-5. Add ability to cross check other sites
+1. Add ability to cross check other sites
  
